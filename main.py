@@ -7,9 +7,9 @@ RED = "#e7305b"
 GREEN = "#9bdeac"
 YELLOW = "#f7f5dd"
 FONT_NAME = "Courier"
-WORK_MIN = 25
-SHORT_BREAK_MIN = 5
-LONG_BREAK_MIN = 20
+WORK_MIN = 1
+SHORT_BREAK_MIN = 2
+LONG_BREAK_MIN = 1
 CHECK_MARK = "✔"
 reps = 0
 
@@ -18,18 +18,23 @@ reps = 0
 
 # ---------------------------- TIMER MECHANISM ------------------------------- #
 def start_timer():
-    global reps
+    # global reps
     work_sec = WORK_MIN * 60
     short_break_sec = SHORT_BREAK_MIN * 60
     long_break_sec = LONG_BREAK_MIN * 60
 
-    for _ in range(8):
+    for i in range(8):
         # If it's the 1st/3rd/5th/7th rep:
-        count_down(work_sec)
-        # If it's the 8th rep:
-        count_down(long_break_sec)
+        if i == 0 or i % 2 != 0:
+            count_down(work_sec)
+
         # If it's 2nd/4th/6th rep:
-        count_down(short_break_sec)
+        if i == 2 or i % 2 == 0:
+            count_down(short_break_sec)
+
+        # If it's the 8th rep:
+        if i == 8:
+            count_down(long_break_sec)
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
 def count_down(count):
